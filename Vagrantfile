@@ -13,10 +13,10 @@ Vagrant.configure("2") do |config|
 		sudo yum install epel-release -y
 		sudo yum update -y
 		#Java installtion and path set
-		sudo yum install java-1.8.0-openjdk.x86_64 -y
+		sudo yum install java-1.8.0* -y
 		java -version
 		sudo cp /etc/profile /etc/profile_backup
-		echo 'export JAVA_HOME=/usr/lib/jvm/jre-1.8.0-openjdk' | sudo tee -a /etc/profile
+		echo 'export JAVA_HOME=/usr/lib/jvm/java-openjdk' | sudo tee -a /etc/profile
 		echo 'export JRE_HOME=/usr/lib/jvm/jre' | sudo tee -a /etc/profile_backup
 		source /etc/profile
 		#cross check Java path and home dir
@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
 		sudo tar -xvf apache-maven-3.5.2-bin.tar.gz
 		sudo sed -i '/PasswordAuthentication/d/' /etc/ssh/sshd_config
 		sudo echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
+		sudo systemctl reload  sshd
 		SHELL
 	end
 end
