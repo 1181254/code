@@ -9,7 +9,6 @@ Vagrant.configure("2") do |config|
 	#master.hostmanager.aliases = %w(master1)
 	config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 	master.vm.provision "shell", inline: <<-SHELL
-		sudo systemctl reload  sshd
 		sudo yum install epel-release -y
 		sudo yum update -y
 		#Java installtion and path set
