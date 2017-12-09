@@ -1,0 +1,26 @@
+#Make sure you have run 'vagrant plugin install vagrant-vbguest' first.
+Vagrant.configure("2") do |config|
+	config.vm.define "client" do |client|
+	client.vm.provider :virtualbox
+	#Jenkins client node running on Centos 7
+	client.vm.box = "centos/7"
+	client.vm.hostname = "client.mylab.local"
+	client.vm.network :private_network, ip:"10.0.0.5"
+	#client.hostmanager.aliases = %w(client1)
+	config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+	client.vm.provision "shell", inline: <<-SHELL
+		sudo yum install epel-release -y
+		sudo yum update -y
+		SHELL
+	end
+	config.vm.provision "shell" do |s|
+    ssh_pub_key = File.readlines("#{Dir.home}/key/id_rsa.pub").first.strip
+    s.inline = <<-SHELL
+	  sudo useradd -m tempuser
+	  sudo mkdir -p /home/tempuser/.ssh/
+	  touch /home/tempuser/.ssh/authorized_keys
+      sudo echo #{ssh_pub_key} >> /home/tempuser/.ssh/authorized_keys
+	  sudo echo "tempuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+    SHELL
+  end
+end
