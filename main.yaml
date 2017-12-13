@@ -1,0 +1,21 @@
+# Basic provisioning example in EC2
+ - hosts: localhost
+   connection: local
+   become: False
+   gather_facts: False
+   tasks:
+   - pip:
+       name: boto
+   - name: Provision a set of instances
+     ec2:
+        aws_access_key: AKIAJD55RKNKZHESMJBQ
+        aws_secret_key: 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
+        key_name: ajay1
+        instance_type: t2.micro
+        image: ami-15e9c770
+        region: us-east-2
+        wait: yes
+        group: default
+        count: 1
+        vpc_subnet_id: subnet-f6384f8d
+        assign_public_ip: yes
