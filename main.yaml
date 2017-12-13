@@ -8,8 +8,8 @@
        name: boto
    - name: Provision a set of instances
      ec2:
-        aws_access_key: AKIAJD55RKNKZHESMJBQ
-        aws_secret_key: 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
+        aws_access_key: 
+        aws_secret_key: 
         key_name: ajay1
         instance_type: t2.micro
         image: ami-15e9c770
