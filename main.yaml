@@ -41,3 +41,20 @@ ansible-playbook -l webservers copy.yaml
       creates: /tmp/pappu.txt
       
  -----------------------------------------------------End----------------------------------------------------------------------
+ 
+ ---
+# copy file
+ - hosts: all
+   gather_facts: False
+   tasks:
+
+   - name: copy file to node2
+     shell:
+          cp -r  {{ item.src }}  {{ item.dest }}
+     with_items:
+     - { src: /etc/hosts, dest: /tmp/joe.txt }
+     - { src: /etc/hosts, dest: /tmp/zook.txt }
+     args:
+      creates: /var/lib/mysql/mysql.sock
+
+
