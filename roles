@@ -30,4 +30,23 @@ Here it will run the role `admin` on all hosts. It will run below
 ---
 # tasks file for admin
 
+########################################
+]# cat roles/admin/tasks/main.yml
+---
+# tasks file for admin
+-  name: Install ntp modules required by our app.
+   yum: name={{ item }}  state=present
+   with_items: ntp
+   
+   
+# cat test.yaml
+---
+ - hosts: all
+   become: yes
+   roles:
+   - admin
 
+# ansible-playbook test.yaml
+
+   
+   
