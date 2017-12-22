@@ -9,3 +9,11 @@ Maven -> Java Project
 MsBuild -> .Net Project
 
 Enbale Auto refresh.
+
+freestly project
+General
+Project name "test"
+Build -> "Add build step" -> "Execute shell"
+echo welcome jekins
+
+
