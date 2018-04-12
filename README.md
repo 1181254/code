@@ -297,8 +297,8 @@
 		EOF
 		/etc/init.d/ntpd restart
 		
-============================================
-I've deleted some files on my PC and commited to local db
+--------------------------------------I've deleted some files on my PC and commited to  local db--------------------------
+
 		git checkout HEAD <path>
 		path is file name
 	
