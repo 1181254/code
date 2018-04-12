@@ -29,3 +29,9 @@ services:
        # constraints: [node.role == worker]
 networks:
     younet:
+
+
+ docker stack deploy --compose-file=docker-compose.yml web1
+ docker stack rm  web1
+ Have to change if you are re running the same compose file
+ 
