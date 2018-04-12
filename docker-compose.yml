@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+        MYSQL_ROOT_PASSWORD: abc123
+    networks:
+      - younet
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  wordpress:
+    image: wordpress
+    ports:
+      - 8081:80
+    environment:
+       WORDPRESS_DB_PASSWORD: abc123
+    networks:
+      - younet
+    depends_on:
+      - mysql
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels: [APP=WEBAPSS]
+      #placement:
+       # constraints: [node.role == worker]
+networks:
+    younet:
