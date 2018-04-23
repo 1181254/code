@@ -1,0 +1,52 @@
+Understanding roles.
+
+/etc/ansible/roles
+# ansible-galaxy  init  admin
+- admin was created successfully
+
+
+# ls -l admin/
+total 4
+drwxr-xr-x. 2 root root   22 Dec 14 10:27 defaults
+drwxr-xr-x. 2 root root    6 Dec 14 10:27 files
+drwxr-xr-x. 2 root root   22 Dec 14 10:27 handlers
+drwxr-xr-x. 2 root root   22 Dec 14 10:27 meta
+-rw-r--r--. 1 root root 1328 Dec 14 10:27 README.md
+drwxr-xr-x. 2 root root   22 Dec 14 10:27 tasks
+drwxr-xr-x. 2 root root    6 Dec 14 10:27 templates
+drwxr-xr-x. 2 root root   39 Dec 14 10:27 tests
+drwxr-xr-x. 2 root root   22 Dec 14 10:27 vars
+
+
+
+#vi /etc/ansible/playbook.yml
+---
+ - hosts: all
+   roles:
+   - admin
+
+Here it will run the role `admin` on all hosts. It will run below
+# cat admin/tasks/main.yml
+---
+# tasks file for admin
+
+########################################
+]# cat roles/admin/tasks/main.yml
+---
+# tasks file for admin
+-  name: Install ntp modules required by our app.
+   yum: name={{ item }}  state=present
+   with_items: ntp
+   
+   
+# cat test.yaml
+---
+ - hosts: all
+   become: yes
+   roles:
+   - admin
+
+# ansible-playbook test.yaml
+
+   
+   

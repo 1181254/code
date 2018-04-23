@@ -1,0 +1,11 @@
+Host <firstserver>
+HostName <IP Address>
+User <user name>
+ForwardAgent yes
+
+Host <secondserver>
+HostName <IP Address>
+User <user name>
+IdentityFile <path of the private key>
+ProxyCommand ssh -W %h:%p <firstserver>
+LocalForward 8011 <server local ip address>:<application port number>

@@ -1,0 +1,19 @@
+https://www.vultr.com/docs/how-to-install-jenkins-on-centos-7
+
+How to Install plugin
+Jenkins -> Plugin Manager -> search "maven"
+
+Ant -> Java project
+Maven -> Java Project
+
+MsBuild -> .Net Project
+
+Enbale Auto refresh.
+
+freestly project
+General
+Project name "test"
+Build -> "Add build step" -> "Execute shell"
+echo welcome jekins
+
+
